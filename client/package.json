@@ -1,0 +1,29 @@
+{
+  "name": "templ-lsp-html-htmx",
+  "license": "MIT",
+  "version": "0.0.1",
+  "publisher": "baswilson",
+  "repository": {
+    "type": "git"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.7",
+    "@types/vscode": "^1.81.0",
+    "typescript": "^5.2.2"
+  }
+}
