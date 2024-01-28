@@ -38,7 +38,7 @@ func SendResponse(writer *bufio.Writer, id int, result interface{}) error {
 		return err
 	}
 
-	WriteLog(string(responseBytes))
+	WriteLog("Sent response for id " + strconv.Itoa(id))
 
 	return nil
 }

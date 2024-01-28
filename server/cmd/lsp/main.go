@@ -33,8 +33,13 @@ func main() {
 			continue
 		}
 
-		contentLength := regex.FindSubmatch(buffer)[1]
-		startOfBody := regex.FindSubmatchIndex(buffer)[1] + 4
+		// this function returns a slice of 4 ints:
+		// [startOfMatch endOfMatch startOfSubmatch endOfSubmatch]
+		// [0 20 16 20] for example (where 20 is the length of the match)
+		// 0-20: Content-Length: 1234 (the match) (20 chars). 16-20: 1234 (the submatch) (4 chars). Total length of match is 20.
+		matches := regex.FindSubmatchIndex(buffer)
+		contentLength := buffer[matches[2]:matches[3]] // [startOfSubmatch endOfSubmatch] [16 20]
+		startOfBody := matches[1] + 4                  // +4 to skip \r\n\r\n (they are seen as 1 byte each.)
 		contentLengthInt, err := strconv.Atoi(string(contentLength))
 		if err != nil {
 			methods.WriteLog(err.Error())
