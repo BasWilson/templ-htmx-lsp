@@ -50,11 +50,11 @@ func main() {
 			continue
 		}
 
-		raw := buffer[startOfBody : startOfBody+contentLengthInt]
-		methods.WriteLog(string(raw))
+		rawMessage := buffer[startOfBody : startOfBody+contentLengthInt]
+		methods.WriteLog(string(rawMessage))
 
 		var message methods.RequestMessage
-		if err := json.Unmarshal(raw, &message); err != nil {
+		if err := json.Unmarshal(rawMessage, &message); err != nil {
 			methods.WriteLog(err.Error())
 			continue
 		}
@@ -65,10 +65,19 @@ func main() {
 		switch message.Method {
 		case "initialize":
 			result, methodError = methods.Initialize(message)
+		case "textDocument/completion":
+			result, methodError = methods.TextDocumentCompletion(rawMessage)
+		case "textDocument/didChange":
+			methodError = methods.TextDocumentDidChange(rawMessage)
 		}
 
 		if methodError != nil {
 			methods.WriteLog("ERROR: " + methodError.Error())
+			continue
+		}
+
+		if result == nil {
+			buffer = buffer[startOfBody+contentLengthInt:]
 			continue
 		}
 

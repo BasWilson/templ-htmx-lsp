@@ -35,7 +35,7 @@ func Initialize(params RequestMessage) (IntializeResult, error) {
 	return IntializeResult{
 		Capabilities: Capabilities{
 			CompletionProvider: CompletionProvider{},
-			TextDocumentSync:   1,
+			TextDocumentSync:   1, // get full changes
 		},
 		ServerInfo: ServerInfo{
 			Name:    "templ-html-htmx-lsp",
