@@ -9,6 +9,8 @@ It is not published to the extension store, but you can easily install it by fol
 
 You can download the latest release from the [releases page](https://github.com/BasWilson/templ-htmx-lsp/releases)
 
+Or you can build it yourself.
+
 1. Clone the repository
 
 ```bash
