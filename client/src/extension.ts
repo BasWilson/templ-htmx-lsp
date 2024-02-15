@@ -8,11 +8,14 @@ import {
 } from "vscode-languageclient/node";
 
 let client: LanguageClient;
+let isDev = process.env.NODE_ENV === "development";
 
 export function activate(context: ExtensionContext) {
   // The server is implemented in node
-  const serverPath = context.asAbsolutePath(
-    path.join("../", "server", "bin", "lsp")
+  const serverPath = isDev ? context.asAbsolutePath(
+    path.join("out", "server")
+  ) : context.asAbsolutePath(
+    path.join("..", "server", "bin", "lsp")
   );
 
   // Options to control the language client

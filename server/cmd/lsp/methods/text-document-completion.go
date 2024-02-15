@@ -193,7 +193,7 @@ func TextDocumentCompletion(rawMessage []byte) (CompletionList, error) {
 					}
 				}
 			}
-
+			
 			for _, attribute := range attributesByHtmlTag(htmlTag, attributesToSkip) {
 				items = append(items, CompletionItem{
 					Label:            attribute,

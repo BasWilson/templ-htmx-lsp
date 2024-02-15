@@ -11,12 +11,12 @@
   ],
   "main": "./out/extension",
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run compile && cd ../server && make compile && mv bin/lsp ../client/out/server && cd ../client",
     "compile": "tsc -b",
-    "watch": "tsc -b -w"
+    "watch": "NODE_ENV=development tsc -b -w"
   },
   "engines": {
-    "vscode": "^1.75.0"
+    "vscode": "^1.81.0"
   },
   "dependencies": {
     "vscode-languageclient": "^8.1.0"
